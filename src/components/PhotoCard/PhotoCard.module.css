@@ -7,7 +7,7 @@
 
 .card {
   overflow: hidden;
-  border-radius: 2rem;
+  border-radius: 8px;
   transition: box-shadow 0.5s;
   position: relative;
   aspect-ratio: 1;
@@ -22,10 +22,10 @@
 
 .text-overlay {
   position: absolute;
-  top: 32px; /* Adjust as needed to position the text */
-  left: 32px; /* Adjust as needed to position the text */
-  color: var(--body); /* Text color */
-  z-index: 1; /* Ensure the text appears on top of the image */
+  top: 32px;
+  left: 32px;
+  color: var(--body);
+  z-index: 1;
   max-width: 60%;
 }
 
@@ -61,7 +61,7 @@
 
 @media (max-width: 640px) {
   .card {
-    border-radius: 1.5rem;
+    border-radius: 6px;
   }
   .card-wrapper {
     gap: 0.75rem;
