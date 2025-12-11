@@ -123,6 +123,17 @@ a {
   margin-top: 1rem;
 }
 
+.nav,
+.navlink,
+.navlink-container,
+.drawer-inner,
+.tablet-link,
+.login-menu,
+.tablet-login-menu {
+  font-family: "Orbitron", sans-serif !important;
+}
+
+
 @keyframes grow {
   from {
     width: 0%;
