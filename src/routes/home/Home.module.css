@@ -51,20 +51,20 @@
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  row-gap: 160px;
+  row-gap: 80px;
   padding: 0 80px;
 }
 
 .section-wrapper {
   display: flex;
   flex-direction: column;
-  row-gap: 48px;
+  row-gap: 28px;
 }
 
 .text-section {
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
+  row-gap: 14px;
 }
 
 .banner {
