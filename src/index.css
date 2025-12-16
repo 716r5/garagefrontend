@@ -41,20 +41,28 @@ body {
 }
 
 :root {
-  --garage-blue: #284d8a;
-  --garage-blue-hover: #204279;
-  --garage-blue-press: #193462;
-  --white: #ffffff;
-  --body: #1a1a1a;
-  --background: #f6f6f6;
-  --outline: #cbcbcb;
-  --outline-hover: #1a1a1a1a;
-  --outline-press: #1a1a1a33;
-  --disabled: #d9d9d9;
-  --on-disabled: #737373;
-  --error: #e10d0d;
-  --table-disabled: #a3b4cc;
-  --table-accent: #e5f1ff;
+  --garage-blue: #3563C0;
+  --garage-blue-hover: #6CC6F0;
+  --garage-blue-press: #1D2E67;
+
+  --white: #FFFFFF;
+  --body: #141C3C;
+  --background: #F6FBFF;
+  --outline: #BBD3F2;
+  --outline-hover: #55A5EE33;
+  --outline-press: #55A5EE55;
+
+  --disabled: #1D2E67;
+  --on-disabled: #6190BE;
+
+  --error: #E10D0D;
+  --table-disabled: #A9C4E6;
+  --table-accent: #E5F4FF;
+
+  --radius: 16px; /*for depth, dk if can see yet*/
+  --shadow-1: 0 1px 2px rgba(15, 23, 42, .08), 0 8px 24px rgba(15, 23, 42, .08);
+  --shadow-2: 0 2px 6px rgba(15, 23, 42, .10), 0 18px 50px rgba(15, 23, 42, .14);
+  --glow: 0 0 0 1px rgba(85,165,238,.12), 0 0 28px rgba(108,198,240,.18);
 
   --max-width: 1440px;
   --header-height: 60px;
