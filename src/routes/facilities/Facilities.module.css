@@ -85,6 +85,7 @@
   }
   .facility-description {
     gap: var(--para-gap-mobile);
+    line-height: 1.4;
   }
   .facility-image {
     width: 100%;
