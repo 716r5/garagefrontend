@@ -87,8 +87,8 @@
 }
 
 .banner-image {
-  min-height: 640px;
-  max-height: 640px;
+  min-height: 610px;
+  max-height: 610px;
   width: 100%;
   object-fit: cover;
   border-radius: 8px;
