@@ -55,7 +55,7 @@ const Home = () => {
             </div>
           )}
           <div className={styles["content-wrapper"]}>
-            {/* Top action row (homepage-only) */}
+
             <div className={styles["top-actions"]}>
               <Link to="/events" className={styles["action-link"]}>
                 <Typography variant="body">Attend workshop</Typography>
@@ -64,7 +64,7 @@ const Home = () => {
                 <Typography variant="body">Book facility</Typography>
               </Link>
             </div>
-            {/* Upcoming events marquee strip (homepage-only) */}
+    
             <div className={styles["marquee"]}>
               <div className={styles["marquee-content"]}>
                 {eventData && [...eventData, ...eventData].map((event, index) => (
@@ -80,7 +80,7 @@ const Home = () => {
                 <Typography variant="smallHeading">the joy of engineering is in tinkering and creating together</Typography>                <Button to="/login">Login</Button>
               </div>
             </div>
-            {/* Flagship Events section */}
+            
             <section className={styles["section-wrapper"]}>
               <Typography variant="heading">Flagship Events</Typography>
               {eventData ? (
@@ -100,7 +100,7 @@ const Home = () => {
                 </div>
               )}
             </section>
-            {/* Current Projects section */}
+            
             <section className={styles["section-wrapper"]}>
               <Typography variant="heading">Our Current Projects</Typography>
               {projectData ? (
