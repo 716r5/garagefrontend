@@ -51,8 +51,8 @@
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  row-gap: 80px;
-  padding: 0 80px;
+  row-gap: 10px;
+  padding: 0 10px;
 }
 
 .section-wrapper {
@@ -69,11 +69,11 @@
 
 .banner {
   height: calc(100vh - var(--top-padding));
-  min-height: 760px;
+  min-height: 1.5rem;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  row-gap: 1.5rempx;
+  row-gap: 1.5rem;
   padding-bottom: 1.5rem;
   padding-left: 5rem;
   padding-right: 5rem;
@@ -81,14 +81,14 @@
 
 .banner-space {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
 }
 
 .banner-image {
-  min-height: 610px;
-  max-height: 610px;
+  min-height: 640px;
+  max-height: 640px;
   width: 100%;
   object-fit: cover;
   border-radius: 8px;
@@ -101,24 +101,9 @@
   padding: 64px 0;
 }
 
+
 .tablet {
   display: none;
-}
-
-.innovators-image, .tinkering-image {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-.innovators-text, .tinkering-text {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 48px;
-  align-items: flex-start;
 }
 
 .card-wrapper {
@@ -174,242 +159,46 @@
 
 .issues {
   width: 100%;
-  margin-bottom: 24px;
+  margin-bottom: 1 rem;
 }
 
-/* Tablet (iPad and similar) - 768px to 1200px */
-@media (max-width: 1200px) {
-  .content-wrapper {
-    padding: 0 48px;
-    row-gap: 120px;
-  }
-
-  .banner {
-    padding-left: 48px;
-    padding-right: 48px;
-  }
-
-  .section-wrapper {
-    row-gap: 40px;
-  }
-
-  .text-section {
-    row-gap: 20px;
-  }
-
-  .scroll-more {
-    display: none;
-  }
-
-  .banner {
-    height: auto;
-    min-height: unset;
-  }
-
-  .innovators, .tinkering {
-    flex-direction: column;
-    gap: 40px;
-    align-items: flex-start;
-    padding: 48px 0;
-  }
-
-  .tablet {
-    display: unset;
-  }
-
-  .tablet-hide {
-    display: none;
-  }
-
-  .innovators-image, .tinkering-image {
-    aspect-ratio: 2;
-    max-width: 100%;
-  }
-
-  .innovators-text, .tinkering-text {
-    row-gap: 40px;
-  }
-
-  .facilities-images {
-    height: 440px;
-    gap: 24px;
-  }
-
-  .facilities-images > :nth-child(n) {
-    flex: 1 0;
-  }
-
-  .facilities-images-smaller {
-    gap: 24px;
-  }
-
-  .grid-wrapper {
-    row-gap: 40px;
-  }
-
-  .loading-wrapper {
-    height: 200px;
-  }
+.top-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
 }
 
-/* Small tablets and large phones - 640px to 768px */
-@media (max-width: 768px) {
-  .content-wrapper {
-    padding: 0 32px;
-    row-gap: 80px;
-  }
-
-  .banner {
-    padding-left: 32px;
-    padding-right: 32px;
-    row-gap: 20px;
-    padding-bottom: 20px;
-  }
-
-  .section-wrapper {
-    row-gap: 32px;
-  }
-
-  .text-section {
-    row-gap: 16px;
-  }
-
-  .innovators, .tinkering {
-    gap: 32px;
-    padding: 40px 0;
-  }
-
-  .innovators-text, .tinkering-text {
-    row-gap: 32px;
-  }
-
-  .facilities-images {
-    height: 360px;
-    gap: 20px;
-  }
-
-  .facilities-images-smaller {
-    gap: 20px;
-  }
-
-  .grid-wrapper {
-    row-gap: 32px;
-  }
-
-  .card-wrapper {
-    row-gap: 24px;
-  }
-
-  .loading-wrapper {
-    height: 180px;
-  }
+.action-link {
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Mobile phones - below 640px */
-@media (max-width: 640px) {
-  .content-wrapper {
-    padding: 0 24px;
-    row-gap: 64px;
-  }
-
-  .banner {
-    padding-left: 24px;
-    padding-right: 24px;
-    row-gap: 16px;
-    padding-bottom: 16px;
-  }
-
-  .section-wrapper {
-    row-gap: 24px;
-  }
-
-  .text-section {
-    row-gap: 16px;
-  }
-
-  .banner-image {
-    min-height: 320px;
-    max-height: 400px;
-  }
-
-  .innovators, .tinkering {
-    gap: 24px;
-    padding: 32px 0;
-  }
-
-  .innovators-image, .tinkering-image {
-    aspect-ratio: unset;
-  }
-
-  .innovators-text, .tinkering-text {
-    row-gap: 24px;
-  }
-
-  .facilities-images {
-    flex-direction: column;
-    height: unset;
-    gap: 24px;
-  }
-
-  .facilities-images-smaller {
-    display: none;
-  }
-
-  .grid-wrapper {
-    row-gap: 24px;
-  }
-
-  .card-wrapper {
-    row-gap: 20px;
-  }
-
-  .loading-wrapper {
-    height: 160px;
-  }
-
-  .expired-warning-backdrop {
-    padding: 16px;
-  }
-
-  .expired-warning-modal {
-    padding: 32px 24px;
-  }
-
-  .expired-warning-modal button {
-    padding: 10px 24px;
-    margin-top: 24px;
-  }
+.marquee {
+  background-color: var(--garage-blue);
+  color: white;
+  padding: 0.5rem 0;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Extra small phones - below 400px */
-@media (max-width: 400px) {
-  .content-wrapper {
-    padding: 0 16px;
-    row-gap: 48px;
-  }
+.marquee-content {
+  display: flex;
+  animation: scroll 10s linear infinite;
+}
 
-  .banner {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
+.marquee-item {
+  white-space: nowrap;
+  margin-right: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
 
-  .section-wrapper {
-    row-gap: 20px;
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
   }
-
-  .innovators, .tinkering {
-    padding: 24px 0;
-  }
-
-  .facilities-images {
-    gap: 16px;
-  }
-
-  .grid-wrapper {
-    row-gap: 20px;
-  }
-
-  .expired-warning-modal {
-    padding: 24px 16px;
+  100% {
+    transform: translateX(-50%);
   }
 }
