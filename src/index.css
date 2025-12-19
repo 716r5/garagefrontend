@@ -47,7 +47,7 @@ body {
 
   --white: #FFFFFF;
   --body: #141C3C;
-  --background: #f8f4ec;
+  --background: #F6FBFF;
   --outline: #BBD3F2;
   --outline-hover: #55A5EE33;
   --outline-press: #55A5EE55;
@@ -59,7 +59,7 @@ body {
   --table-disabled: #A9C4E6;
   --table-accent: #E5F4FF;
 
-  --radius: 16px; /*for depth, dk if can see yet*/
+  --radius: 16px;
   --shadow-1: 0 1px 2px rgba(15, 23, 42, .08), 0 8px 24px rgba(15, 23, 42, .08);
   --shadow-2: 0 2px 6px rgba(15, 23, 42, .10), 0 18px 50px rgba(15, 23, 42, .14);
   --glow: 0 0 0 1px rgba(85,165,238,.12), 0 0 28px rgba(108,198,240,.18);

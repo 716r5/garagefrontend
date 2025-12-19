@@ -3,28 +3,24 @@ footer {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding: 3rem 1.5rem; 
 }
 
 .footer-wrapper {
-  max-width: 1440px;
+  max-width: 90rem; 
   display: flex;
   width: 100%;
-
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: clamp(1rem, 2vw, 3rem); 
 }
 
 .texts {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem 0;
+  gap: 1.5rem;
 }
 
 footer p {
@@ -42,17 +38,121 @@ footer p {
   gap: 0.75rem;
 }
 
-footer img {
-  width: 100%;
-  height: 100%;
-}
-
-.social-media a {
-  transition: 0.3s ease;
+.media-buttons a {
+  position: relative;
+  list-style: none;
   width: 2.25rem;
   height: 2.25rem;
+  background: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 60px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  text-decoration: none;
 }
 
-.social-media a:hover {
-  opacity: 0.6;
+.media-buttons a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 60px;
+  background: linear-gradient(45deg, var(--i), var(--j));
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.media-buttons a::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 60px;
+  background: linear-gradient(45deg, var(--i), var(--j));
+  transition: 0.5s;
+  filter: blur(15px);
+  z-index: -1;
+  opacity: 0;
+}
+
+.media-buttons a:hover {
+  width: 180px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0);
+}
+
+.media-buttons a:hover::before {
+  opacity: 1;
+}
+
+.media-buttons a:hover::after {
+  opacity: 0.5;
+}
+
+.media-buttons a img {
+  color: #777;
+  font-size: 1.75em;
+  transition: 0.5s;
+  transition-delay: 0.25s;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.media-buttons a:hover img {
+  transform: scale(0);
+  color: #fff;
+  transition-delay: 0s;
+}
+
+.media-buttons a .title {
+  position: absolute;
+  color: #fff;
+  font-size: 1.1em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: scale(0);
+  transition: 0.5s;
+  transition-delay: 0s;
+}
+
+.media-buttons a:hover .title {
+  transform: scale(1);
+  transition-delay: 0.25s;
+}
+
+/* LinkedIn */
+.media-buttons a:nth-child(1) {
+  --i: #4cb2e9;
+  --j: #4c7ee9;
+}
+
+/* Instagram */
+.media-buttons a:nth-child(2) {
+  --i: #f09433;
+  --j: #e6683c;
+}
+
+/* GitHub */
+.media-buttons a:nth-child(3) {
+  --i: #333;
+  --j: #24292e;
+}
+
+/* Responsive: disable expansion on mobile, impt! reason touch devices don't have true "hover" states, and expanding buttons could cause layout issues or poor UX */
+@media (max-width: 768px) {
+  .media-buttons a:hover {
+    width: 2.25rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .media-buttons a:hover img {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  .media-buttons a:hover .title {
+    display: none;
+  }
 }

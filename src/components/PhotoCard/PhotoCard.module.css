@@ -22,8 +22,8 @@
 
 .text-overlay {
   position: absolute;
-  top: 32px;
-  left: 32px;
+  top: 2rem;
+  left: 2rem;
   color: var(--body);
   z-index: 1;
   max-width: 60%;
@@ -43,11 +43,11 @@
   transform: scale(1.02);
 }
 .link:hover .card {
-  box-shadow: 0 0px 50px -12px rgb(0 0 0 / 0.4);
+  box-shadow: 0 0 3.125rem -0.75rem rgb(0 0 0 / 0.4);
 }
 
 .card:hover {
-  box-shadow: 0 0px 50px -12px rgb(0 0 0 / 0.4);
+  box-shadow: 0 0 3.125rem -0.75rem rgb(0 0 0 / 0.4);
 }
 .card:hover .card-image {
   transform: scale(1.02);

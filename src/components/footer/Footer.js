@@ -34,6 +34,7 @@ const Footer = () => {
               rel="noreferrer"
             >
               <img src={linkedin} alt="garage linkedin link" />
+              <span className={styles["title"]}>LinkedIn</span>
             </a>
             <a
               href="https://www.instagram.com/garage_at_eee/"
@@ -41,6 +42,7 @@ const Footer = () => {
               rel="noreferrer"
             >
               <img src={instagram} alt="garage instagram link" />
+              <span className={styles["title"]}>Instagram</span>
             </a>
             <a
               href="https://github.com/Garage-at-EEE"
@@ -48,6 +50,7 @@ const Footer = () => {
               rel="noreferrer"
             >
               <img src={github} alt="garage github link" />
+              <span className={styles["title"]}>GitHub</span>
             </a>
           </div>
         </div>

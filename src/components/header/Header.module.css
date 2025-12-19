@@ -18,7 +18,7 @@
 }
 
 .logo {
-  height: 36px;
+  height: 2.25rem;
 }
 
 a {
@@ -51,7 +51,7 @@ a {
   content: "";
   display: block;
   transition: width 0.3s cubic-bezier(0.7, 0, 0.3, 1);
-  height: 2px;
+  height: 0.125rem;
   background-color: var(--body);
   width: 0%;
 }
@@ -66,8 +66,8 @@ a {
   border: none;
   cursor: pointer;
   border-radius: 100%;
-  width: 36px;
-  height: 36px;
+  width: 2.25rem;
+  height: 2.25rem;
 }
 
 .drawer {
@@ -85,12 +85,12 @@ a {
 
 .shadow {
   background-color: var(--white);
-  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
-    drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  filter: drop-shadow(0 0.25rem 0.1875rem rgb(0 0 0 / 0.07))
+    drop-shadow(0 0.125rem 0.125rem rgb(0 0 0 / 0.06));
 }
 
 .separator {
-  height: 1px;
+  height: 0.0625rem;
   background-color: var(--outline);
   width: 0;
   animation: grow 0.5s cubic-bezier(0.7, 0, 0.3, 1) 0.1s both;
@@ -105,13 +105,13 @@ a {
   background-color: var(--white);
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .login-menu {
   position: absolute;
   gap: 0.5rem;
-  padding: 10px 10px 10px 12px;
+  padding: 0.625rem 0.625rem 0.625rem 0.75rem;
   align-items: flex-end;
   right: 0;
   left: auto;
@@ -146,7 +146,7 @@ a {
 
 @keyframes slide-in {
   from {
-    transform: translateX(50px);
+    transform: translateX(3.125rem);
   }
 
   to {

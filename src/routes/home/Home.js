@@ -65,7 +65,7 @@ const Home = () => {
               </Link>
             </div>
     
-            <div className={styles["marquee"]}>
+            <Link to="/events" className={styles["marquee"]} style={{display: 'block'}}>
               <div className={styles["marquee-content"]}>
                 {eventData && [...eventData, ...eventData].map((event, index) => (
                   <span key={`${event.name}-${index}`} className={styles["marquee-item"]}>
@@ -73,7 +73,7 @@ const Home = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </Link>
             <div className={styles["banner"]}>
               <div className={styles["banner-space"]}>
                 <Typography variant="banner">STUDENT-LED MAKERSPACE</Typography>
