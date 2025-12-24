@@ -60,6 +60,7 @@ const Home = () => {
               <Link to="/events" className={styles["action-link"]}>
                 <Typography variant="body">Attend workshop</Typography>
               </Link>
+              <Typography variant="body"> | </Typography>
               <Link to="/facilities" className={styles["action-link"]}>
                 <Typography variant="body">Book facility</Typography>
               </Link>
@@ -77,7 +78,8 @@ const Home = () => {
             <div className={styles["banner"]}>
               <div className={styles["banner-space"]}>
                 <Typography variant="banner">STUDENT-LED MAKERSPACE</Typography>
-                <Typography variant="smallHeading">the joy of engineering is in tinkering and creating together</Typography>                <Button to="/login">Login</Button>
+                <Typography variant="smallHeading">the joy of engineering is in tinkering together</Typography>             
+                <Button to="/login">Login</Button>
               </div>
             </div>
             

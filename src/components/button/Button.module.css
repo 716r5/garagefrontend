@@ -9,8 +9,6 @@
   box-sizing: border-box;
 }
 
-
-
 .outlined {
   border: 0.1875rem solid var(--Body, #1a1a1a); 
   color: #1a1a1a;
