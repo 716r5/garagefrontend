@@ -30,19 +30,18 @@ const ContactUs = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setMessageStatus(""); // Clear previous messages
-        setIsLoading(true); // Show loading spinner
+        setMessageStatus("");
+        setIsLoading(true);
 
         const { firstName, lastName, email, phone, category, message } = formData;
 
         if (!firstName || !lastName || !email || !phone || !category || !message) {
             setMessageStatus("Please fill in all required fields.");
-            setIsLoading(false); // Hide loading spinner
+            setIsLoading(false);
             return;
         }
 
         try {
-            // Prepare files payload
             const filesPayload = await Promise.all(filesToUpload.map(file => new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = () => {
@@ -83,7 +82,7 @@ const ContactUs = () => {
             console.error("Error during submission:", error);
             setMessageStatus("Submission failed. Please try again.");
         } finally {
-            setIsLoading(false); // Hide loading spinner after form is submitted successfully
+            setIsLoading(false);
         }
     };
 

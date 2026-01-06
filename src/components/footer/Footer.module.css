@@ -1,158 +1,257 @@
-footer {
-  background-color: #113f8c;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 3rem 1.5rem; 
+/* Footer */
+.footer {
+  background-color: #1e293b;
+  padding: 3rem 0 1.5rem;
 }
 
-.footer-wrapper {
-  max-width: 90rem; 
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: clamp(1rem, 2vw, 3rem); 
+.footerInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.texts {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 }
 
-footer p {
-  color: #ffffff;
+@media (min-width: 640px) {
+  .footerGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.social-media {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+@media (min-width: 1024px) {
+  .footerGrid {
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  }
 }
 
-.media-buttons {
-  display: flex;
-  gap: 0.75rem;
+/* Brand Section */
+.brandSection {
+  grid-column: 1 / -1;
 }
 
-.media-buttons a {
-  position: relative;
-  list-style: none;
-  width: 2.25rem;
-  height: 2.25rem;
-  background: white;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 60px;
-  cursor: pointer;
+@media (min-width: 1024px) {
+  .brandSection {
+    grid-column: auto;
+  }
+}
+
+.brandLogo {
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: 0.5s;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.brandLogo svg {
+  color: var(--garage-blue);
+}
+
+.brandName {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.brandDesc {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Social Links */
+.socialLinks {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.socialLink {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #334155;
+  color: #94a3b8;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.socialLink:hover {
+  background-color: var(--garage-blue);
+  color: #fff;
+}
+
+.socialLink svg {
+  fill: currentColor;
+}
+
+/* Link Sections */
+.linkSection {
+  min-width: 0;
+}
+
+.linkTitle {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footerLink {
+  color: #94a3b8;
   text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
 }
 
-.media-buttons a::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 60px;
-  background: linear-gradient(45deg, var(--i), var(--j));
-  opacity: 0;
-  transition: 0.5s;
+.footerLink:hover {
+  color: var(--garage-blue);
 }
 
-.media-buttons a::after {
-  content: "";
-  position: absolute;
-  top: 10px;
+/* Contact List */
+.contactList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.contactItem svg {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  stroke: var(--garage-blue);
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background-color: #334155;
+  margin: 2rem 0 1.5rem;
+}
+
+/* Footer Bottom */
+.footerBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .footerBottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.copyright {
+  color: #64748b;
+  font-size: 0.75rem;
+}
+
+.backToTop {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #64748b;
+  font-size: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.backToTop:hover {
+  color: var(--garage-blue);
+}
+
+.backToTop svg {
+  transition: transform 0.2s;
+}
+
+.backToTop:hover svg {
+  transform: translateY(-2px);
+}
+
+/* Mobile Bottom Navigation */
+.mobileNav {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
-  border-radius: 60px;
-  background: linear-gradient(45deg, var(--i), var(--j));
-  transition: 0.5s;
-  filter: blur(15px);
-  z-index: -1;
-  opacity: 0;
+  background-color: var(--white);
+  border-top: 1px solid #e2e8f0;
+  justify-content: space-around;
+  padding: 0.75rem 0.5rem;
+  z-index: 50;
 }
 
-.media-buttons a:hover {
-  width: 180px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0);
+@media (min-width: 1024px) {
+  .mobileNav {
+    display: none;
+  }
 }
 
-.media-buttons a:hover::before {
-  opacity: 1;
+.mobileNavItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-.media-buttons a:hover::after {
-  opacity: 0.5;
+.mobileNavItem:hover {
+  color: var(--garage-blue);
 }
 
-.media-buttons a img {
-  color: #777;
-  font-size: 1.75em;
-  transition: 0.5s;
-  transition-delay: 0.25s;
+.mobileNavItem svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.media-buttons a:hover img {
-  transform: scale(0);
-  color: #fff;
-  transition-delay: 0s;
+.mobileNavItem span {
+  font-size: 0.625rem;
+  font-weight: 500;
 }
 
-.media-buttons a .title {
-  position: absolute;
-  color: #fff;
-  font-size: 1.1em;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transform: scale(0);
-  transition: 0.5s;
-  transition-delay: 0s;
+.mobileNavActive {
+  color: var(--garage-blue);
 }
 
-.media-buttons a:hover .title {
-  transform: scale(1);
-  transition-delay: 0.25s;
+/* Spacer for mobile nav */
+.mobileNavSpacer {
+  height: 5rem;
 }
 
-/* LinkedIn */
-.media-buttons a:nth-child(1) {
-  --i: #4cb2e9;
-  --j: #4c7ee9;
-}
-
-/* Instagram */
-.media-buttons a:nth-child(2) {
-  --i: #f09433;
-  --j: #e6683c;
-}
-
-/* GitHub */
-.media-buttons a:nth-child(3) {
-  --i: #333;
-  --j: #24292e;
-}
-
-/* Responsive: disable expansion on mobile, impt! reason touch devices don't have true "hover" states, and expanding buttons could cause layout issues or poor UX */
-@media (max-width: 768px) {
-  .media-buttons a:hover {
-    width: 2.25rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  }
-
-  .media-buttons a:hover img {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-
-  .media-buttons a:hover .title {
+@media (min-width: 1024px) {
+  .mobileNavSpacer {
     display: none;
   }
 }

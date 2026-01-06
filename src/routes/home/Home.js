@@ -1,5 +1,3 @@
-import Grid from "../../components/grid/Grid";
-import Card from "../../components/PhotoCard/PhotoCard";
 import Typography from "../../components/typography/Typography";
 import Transition from "../../components/transition/Transition";
 import useFetch from "../../hooks/useFetch";
@@ -9,8 +7,10 @@ import React, { useState, useEffect } from "react";
 import styles from "./Home.module.css";
 import Button from "../../components/button/Button";
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
-import Image from "../../components/image/Image";
-import Newsletter from "../../components/newsletter/Newsletter";
+import { Link } from "react-router-dom";
+import { ReactComponent as ArrowForward } from "../../icons/arrow_forward_ios.svg";
+import CountUp from "../../components/CountUp/CountUp";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [authStatus, setAuthStatus] = useState(() => localStorage.getItem("authStatus") || "loggedOut");
@@ -19,17 +19,8 @@ const Home = () => {
   const { data, isLoading } = useFetch({
     url: API_DOMAIN + "?type=home",
   });
-  const { data: ambassadorData } = useFetch({
-    url: API_DOMAIN + "?type=ambassadors&fields=name,homeImage",
-  });
-  const { data: projectData } = useFetch({
-    url: API_DOMAIN + "?type=projectInfo&fields=name,coverPic",
-  });
   const { data: eventData } = useFetch({
-    url: API_DOMAIN + "?type=events&fields=name,coverPic",
-  });
-  const { data: newsletterData } = useFetch({
-    url: API_DOMAIN + "?type=newsletter",
+    url: API_DOMAIN + "?type=events&fields=name,coverPic,date,location",
   });
 
   useEffect(() => {
@@ -44,6 +35,18 @@ const Home = () => {
     localStorage.setItem("authStatus", "loggedOut");
   };
 
+  const upcomingWorkshop = eventData?.[0] || {
+    name: "Workshop",
+    location: "TBA",
+  };
+
+  const placeholderSponsors = [
+    { name: "Sponsor 1", image: "" },
+    { name: "Sponsor 2", image: "" },
+    { name: "Sponsor 3", image: "" },
+    { name: "Sponsor 4", image: "" },
+  ];
+
   return (
     <Transition isLoading={isLoading || !data}>
       <div id="start"></div>
@@ -54,218 +57,224 @@ const Home = () => {
               <div className={styles['expired-warning-modal']}>
                 <Typography variant='smallHeading'>Session Timeout</Typography>
                 <Typography variant='body'>We have logged you out to protect you. Please log in again.</Typography>
-                <button   onClick={() => {
-                  handleExpiredLogout();
-                }}><Typography variant='body'>Confirm</Typography>
-                </button>
+                <Button onClick={handleExpiredLogout}>Confirm</Button>
               </div>
             </div>
           )}
+
           <div className={styles["content-wrapper"]}>
-            <div className={styles["banner"]}>
-              <div className={styles["banner-space"]}>
-                <Typography variant="banner">{data.title}</Typography>
-                <div className={styles["scroll-more"]}>
-                  <Typography
-                    variant="body"
-                    style={{ paddingBottom: "0.75rem" }}
-                  >
-                    Scroll to find out more
+            <section className={styles["hero-card"]}>
+              <div className={styles["hero-card-accent"]}></div>
+              <div className={styles["hero-card-content"]}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Typography variant="smallHeading" className={styles["hero-card-title"]}>
+                    Garage@EEE
+                  </Typography>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                >
+                  <Typography variant="body" className={styles["hero-card-text"]}>
+                    Whether you are looking around to start tinkering or have been breaking down every electrical device that comes your way, there's a place for you here.
+                  </Typography>
+                </motion.div>
+                <div className={styles["hero-divider"]}></div>
+                <motion.div
+                  className={styles["hero-card-footer"]}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                >
+                  <Typography variant="body" className={styles["hero-card-ready"]}>
+                    Are you ready?
+                  </Typography>
+                  <Button to="/login">Join Us</Button>
+                </motion.div>
+              </div>
+              <motion.div
+                className={styles["hero-decor-1"]}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 0.15 }}
+                transition={{ duration: 1, delay: 0.8 }}
+              />
+              <motion.div
+                className={styles["hero-decor-2"]}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 0.1 }}
+                transition={{ duration: 1, delay: 1 }}
+              />
+            </section>
+
+            <section className={styles["workshop-card"]}>
+              <div className={styles["workshop-header"]}>
+                <div>
+                  <span className={styles["workshop-badge"]}>Upcoming Workshop</span>
+                  <Typography variant="smallHeading" className={styles["workshop-title"]}>
+                    {upcomingWorkshop.name}
+                  </Typography>
+                  <Typography variant="body" className={styles["workshop-location"]}>
+                    📍 {upcomingWorkshop.location || "TBA"}
                   </Typography>
                 </div>
-              </div>
-              <Image
-                className={styles["banner-image"]}
-                src={data.bannerImage}
-                alt="Garage@EEE Cover"
-              />
-            </div>
-            <section className={styles["section-wrapper"]}>
-              {/* Intro section */}
-              <Typography variant="heading">ABOUT</Typography>
-              <Typography variant="body">{data.about}</Typography>
-              <div className={styles["text-section"]}>
-                <Typography variant="smallHeading">Our Objective</Typography>
-                <Typography variant="body">{data.objective}</Typography>
-              </div>
-            </section>
-            <section className={styles["section-wrapper"]}>
-              {/* Intro section */}
-              <Typography variant="heading">Facilities</Typography>
-              <Typography variant="body">{data.facilities}</Typography>
-              <div className={styles["grid-wrapper"]}>
-                <div className={styles["facilities-images"]}>
-                  <Image src={data.facilitiesImage[0]} />
-                  <div className={styles["facilities-images-smaller"]}>
-                    <Image src={data.facilitiesImage[1]} />
-                    <Image src={data.facilitiesImage[2]} />
-                  </div>
-                </div>
-                <Button to={"/facilities"} variant="outlined">
-                  View More
+                <Button to="/events" className={styles["rsvp-btn"]}>
+                  RSVP
                 </Button>
               </div>
             </section>
-            <section id="ambassadors" className={styles["section-wrapper"]}>
-              <Typography variant={"heading"}>MEMBER TRACKS</Typography>
-              <div className={styles["text-section"]}>
-                <Typography variant={"smallHeading"}>Ambassadors</Typography>
-                <Typography variant={"body"}>{data.ambassadors}</Typography>
-              </div>
-              {ambassadorData ? (
-                <Grid>
-                  {ambassadorData.map((card, index) => (
-                    <Card
-                      key={card.name}
-                      image={card.homeImage}
-                      topText={card.name}
-                      to={"ambassadors/" + index}
-                    />
-                  ))}
-                </Grid>
-              ) : (
-                <div className={styles["loading-wrapper"]}>
-                  <LoadingSpinner />
-                </div>
-              )}
-            </section>
-            {data && (
-              <section id="innovators" className={styles["innovators"]}>
-                <Typography
-                  variant={"smallHeading"}
-                  className={styles["tablet"]}
-                >
-                  Innovators
-                </Typography>
-                <Image
-                  className={styles["innovators-image"]}
-                  objectFit="contain"
-                  src={data.innovatorsImage}
-                  alt="Innovators illustration"
-                />
-                <div className={styles["innovators-text"]}>
-                  <div className={styles["text-section"]}>
-                    <Typography
-                      variant={"smallHeading"}
-                      className={styles["tablet-hide"]}
-                    >
-                      Innovators
-                    </Typography>
-                    <Typography variant={"body"}>{data.innovators}</Typography>
-                    <Typography variant={"smallHeading"}>
-                      Innovator's Track Recruitment
-                    </Typography>
-                    <Typography variant={"body"}>{data.recruitment}</Typography>
-                  </div>
-                  <Button
-                    to={data.registerLink ? data.registerLink : undefined}
-                    disabled={!data.registerLink}
-                  >
-                    {data.registerLink ? "Register" : "Registration Closed"}
-                  </Button>
-                </div>
-              </section>
-            )}
-            {data && (
-              <section id="tinkering" className={styles["tinkering"]}>
-                <div className={styles["tinkering-text"]}>
-                  <div className={styles["text-section"]}>
-                    <Typography
-                      variant={"smallHeading"}
-                    >
-                      Tinkering
-                    </Typography>
-                    <Typography variant={"body"}>{data.tinkering}</Typography>
-                    <Typography variant={"smallHeading"}>
-                      Tinkering Project Recruitment
-                    </Typography>
-                    <Typography variant={"body"}>{data.tinkeringRecruitment}</Typography>
-                  </div>
-                  <Button to="/tinkeringProject">
-                    Find out more
-                  </Button>
-                </div>
-                <Image
-                  className={styles["tinkering-image"]}
-                  objectFit="contain"
-                  src={data.tinkeringImage}
-                  alt="Tinkering illustration"
-                />
-              </section>
-            )}
-            <section className={styles["section-wrapper"]}>
-              <Typography variant={"heading"}>PROJECT SHOWCASE</Typography>
-              {projectData ? (
-                <div className={styles["grid-wrapper"]}>
-                  <Grid>
-                    {projectData.map((card, index) => (
-                      <Card
-                        key={card.name}
-                        image={card.coverPic}
-                        to={"projects/" + index}
-                        bottomText={card.name}
-                      />
-                    ))}
-                  </Grid>
-                  <Button to={"/projects"} variant="outlined">
-                    View More
-                  </Button>
-                </div>
-              ) : (
-                <div className={styles["loading-wrapper"]}>
-                  <LoadingSpinner />
-                </div>
-              )}
-            </section>
-            <section className={styles["section-wrapper"]}>
-              <Typography variant={"heading"}>OUR EVENTS</Typography>
-              {eventData ? (
-                <Grid>
-                  {eventData.map((card, index) => (
-                    <Card
-                      key={card.name}
-                      image={card.coverPic}
-                      to={"events/" + index}
-                      bottomText={card.name}
-                    />
-                  ))}
-                </Grid>
-              ) : (
-                <div className={styles["loading-wrapper"]}>
-                  <LoadingSpinner />
-                </div>
-              )}
-            </section>
 
-            <section className={styles["section-wrapper"]}>
-              <Typography variant={"heading"}>Behind The Rollerdoor</Typography>
-              <Typography variant="body">{data.newsletter}</Typography>
-              {newsletterData ? (
-                <div className={styles["grid-wrapper"]}>
-                  <div className={styles["issues"]}>
-                    <Typography variant="smallHeading">
-                      Recent Issues
+            <div className={styles["flagship-section"]}>
+              <div className={styles["flagship-card"]}>
+                <div className={styles["section-header"]}>
+                  <Typography variant="body" className={styles["section-title"]}>
+                    Flagship Events
+                  </Typography>
+                  <Link to="/events" className={styles["section-arrow"]}>
+                    <ArrowForward />
+                  </Link>
+                </div>
+                <Link to="/events" className={styles["flagship-content"]}>
+                  <div className={styles["flagship-images"]}>
+                    {eventData && eventData.length >= 3 ? (
+                      <>
+                        <div className={`${styles["flagship-img"]} ${styles["flagship-img-left"]}`}>
+                          <img src={eventData[1]?.coverPic} alt="Event" loading="lazy" />
+                        </div>
+                        <div className={`${styles["flagship-img"]} ${styles["flagship-img-center"]}`}>
+                          <img src={eventData[0]?.coverPic} alt="Main Event" loading="lazy" />
+                        </div>
+                        <div className={`${styles["flagship-img"]} ${styles["flagship-img-right"]}`}>
+                          <img src={eventData[2]?.coverPic} alt="Event" loading="lazy" />
+                        </div>
+                      </>
+                    ) : (
+                      <div className={styles["loading-wrapper"]}>
+                        <LoadingSpinner />
+                      </div>
+                    )}
+                  </div>
+                  <Typography variant="body" className={styles["flagship-title"]}>
+                    Discover Innovation Festival
+                  </Typography>
+                  <Typography variant="subtitle" className={styles["flagship-subtitle"]}>
+                    Tap to explore our highlights
+                  </Typography>
+                </Link>
+              </div>
+            </div>
+
+            <div className={styles["events-section"]}>
+              <div className={styles["events-card"]}>
+                <div className={styles["section-header"]}>
+                  <Typography variant="body" className={styles["section-title"]}>
+                    Upcoming Events
+                  </Typography>
+                  <Link to="/events" className={styles["section-link"]}>
+                    <Typography variant="subtitle">View All</Typography>
+                  </Link>
+                </div>
+                <div className={styles["event-list"]}>
+                  {eventData ? (
+                    eventData.slice(0, 3).map((event, index) => (
+                      <Link to={`/events/${index}`} key={event.name} className={styles["event-item"]}>
+                        <div className={styles["event-image"]}>
+                          <img src={event.coverPic} alt={event.name} loading="lazy" />
+                        </div>
+                        <div className={styles["event-info"]}>
+                          <Typography variant="body" className={styles["event-name"]}>
+                            {event.name}
+                          </Typography>
+                          <Typography variant="subtitle" className={styles["event-date"]}>
+                            {event.date || "Date TBA"}
+                          </Typography>
+                        </div>
+                        <div className={styles["event-arrow"]}>
+                          <ArrowForward />
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <div className={styles["loading-wrapper"]}>
+                      <LoadingSpinner />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className={styles["sponsors-section"]}>
+              <div className={styles["sponsors-card"]}>
+                <div className={styles["section-header"]}>
+                  <Typography variant="body" className={styles["section-title"]}>
+                    Our Sponsors
+                  </Typography>
+                </div>
+                <div className={styles["sponsors-grid"]}>
+                  {placeholderSponsors.map((sponsor, index) => (
+                    <div key={index} className={styles["sponsor-item"]}>
+                      {sponsor.image ? (
+                        <img src={sponsor.image} alt={sponsor.name} />
+                      ) : (
+                        <Typography variant="subtitle" style={{ color: '#94a3b8' }}>
+                          SPONSOR
+                        </Typography>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className={styles["stats-section"]}>
+              <div className={styles["section-header"]}>
+                <Typography variant="body" className={styles["section-title"]}>
+                  By the Numbers
+                </Typography>
+              </div>
+              <div className={styles["stats-card"]}>
+                <div className={styles["stats-grid"]}>
+                  <div className={styles["stat-item"]}>
+                    <CountUp
+                      end={15}
+                      suffix="+"
+                      duration={1400}
+                      className={styles["stat-number"]}
+                    />
+                    <Typography variant="body" className={styles["stat-label"]}>
+                      Years of Innovation
                     </Typography>
                   </div>
-                  {newsletterData.slice(0, 3).map((issue) => (
-                    <Newsletter
-                      key={issue.name}
-                      src={issue.image}
-                      link={issue.link}
-                      title={issue.name}
-                      date={issue.date}
+                  <div className={styles["stat-item"]}>
+                    <CountUp
+                      end={500}
+                      suffix="+"
+                      duration={1600}
+                      className={styles["stat-number"]}
                     />
-                  ))}
-                  <Button to={"/newsletter"} variant="outlined">
-                    View All
-                  </Button>
+                    <Typography variant="body" className={styles["stat-label"]}>
+                      Builders & Ambassadors
+                    </Typography>
+                  </div>
+                  <div className={styles["stat-item"]}>
+                    <CountUp
+                      end={50}
+                      prefix="$"
+                      suffix="K+"
+                      duration={1800}
+                      className={styles["stat-number"]}
+                    />
+                    <Typography variant="body" className={styles["stat-label"]}>
+                      Total Prizes Won
+                    </Typography>
+                  </div>
                 </div>
-              ) : (
-                <div className={styles["loading-wrapper"]}>
-                  <LoadingSpinner />
-                </div>
-              )}
-            </section>
+              </div>
+            </div>
           </div>
         </PageTemplate>
       )}
