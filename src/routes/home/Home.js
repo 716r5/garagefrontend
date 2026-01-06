@@ -22,6 +22,9 @@ const Home = () => {
   const { data: eventData } = useFetch({
     url: API_DOMAIN + "?type=events&fields=name,coverPic,date,location",
   });
+  const { data: ambassadorData } = useFetch({
+    url: API_DOMAIN + "?type=ambassadors&fields=name,homeImage",
+  });
 
   useEffect(() => {
     if (authStatus === "expired") {
@@ -94,7 +97,7 @@ const Home = () => {
                   <Typography variant="body" className={styles["hero-card-ready"]}>
                     Are you ready?
                   </Typography>
-                  <Button to="/login">Join Us</Button>
+                  <Button to="/ambassadors/0">Join Us</Button>
                 </motion.div>
               </div>
               <motion.div
@@ -122,7 +125,7 @@ const Home = () => {
                     📍 {upcomingWorkshop.location || "TBA"}
                   </Typography>
                 </div>
-                <Button to="/events" className={styles["rsvp-btn"]}>
+                <Button to="/events">
                   RSVP
                 </Button>
               </div>
@@ -271,6 +274,52 @@ const Home = () => {
                     <Typography variant="body" className={styles["stat-label"]}>
                       Total Prizes Won
                     </Typography>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles["ambassador-section"]}>
+              <div className={styles["ambassador-card"]}>
+                <div className={styles["ambassador-content"]}>
+                  <div className={styles["ambassador-text"]}>
+                    <span className={styles["ambassador-badge"]}>Join Us</span>
+                    <Typography variant="body" className={styles["ambassador-heading"]}>
+                      The Ambassador Track
+                    </Typography>
+                    <Typography variant="body" className={styles["ambassador-description"]}>
+                      The Ambassador Track consists of 6 portfolios, namely{" "}
+                      <strong>Branding & Marketing</strong>, <strong>Business Development</strong>,{" "}
+                      <strong>Operations</strong>, <strong>Start-Up</strong>,{" "}
+                      <strong>Training & Development</strong> and <strong>Welfare</strong>.
+                    </Typography>
+                    <Typography variant="body" className={styles["ambassador-description"]}>
+                      Students also ensure that Garage will be an efficient and impactful makerspace.
+                    </Typography>
+                  </div>
+                  <div className={styles["ambassador-grid"]}>
+                    {ambassadorData ? (
+                      ambassadorData.map((portfolio, index) => (
+                        <Link
+                          key={index}
+                          to={`/ambassadors/${index}`}
+                          className={styles["portfolio-card"]}
+                        >
+                          <img
+                            src={portfolio.homeImage}
+                            alt={portfolio.name}
+                            className={styles["portfolio-image"]}
+                          />
+                          <div className={styles["portfolio-overlay"]}>
+                            <span className={styles["portfolio-name"]}>{portfolio.name}</span>
+                          </div>
+                        </Link>
+                      ))
+                    ) : (
+                      <div className={styles["loading-wrapper"]}>
+                        <LoadingSpinner />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

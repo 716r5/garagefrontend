@@ -530,6 +530,147 @@
   font-weight: 500;
 }
 
+/* Ambassador Track Section */
+.ambassador-section {
+  grid-column: 1 / -1;
+}
+
+.ambassador-card {
+  background-color: var(--white);
+  border-radius: 1.5rem;
+  padding: 2rem 2.5rem;
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+
+.ambassador-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .ambassador-content {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .ambassador-text {
+    flex: 0 0 40%;
+  }
+
+  .ambassador-grid {
+    flex: 0 0 60%;
+  }
+}
+
+.ambassador-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ambassador-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background-color: #dbeafe;
+  color: var(--garage-blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+}
+
+.ambassador-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--body);
+  line-height: 1.3;
+}
+
+.ambassador-description {
+  color: #64748b;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.ambassador-description strong {
+  color: var(--body);
+  font-weight: 500;
+}
+
+.ambassador-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--garage-blue);
+  font-weight: 500;
+}
+
+.hint-icon {
+  font-size: 1rem;
+}
+
+.ambassador-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .ambassador-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.portfolio-card {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  box-shadow: var(--shadow-1);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.portfolio-card:hover {
+  box-shadow: var(--shadow-2);
+  transform: scale(1.02);
+}
+
+.portfolio-card:hover .portfolio-image {
+  transform: scale(1.1);
+}
+
+.portfolio-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.2) 50%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+}
+
+.portfolio-name {
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
 /* Event List */
 .events-card {
   background-color: var(--white);
