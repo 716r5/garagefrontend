@@ -109,7 +109,6 @@ const FileUploader = ({ onFilesReady }) => {
                 <Button to={"/contact-us"} variant="outlined">Browse Files</Button>
             </div>
 
-            {/* File List */}
             <div className={styles["file-list"]}>
                 <div className={styles["upload-text-group"]}>
                     <Typography variant="body">{uploadHeader}</Typography>

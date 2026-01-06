@@ -65,7 +65,6 @@
   justify-content: center;
 }
 
-/* ===== BENTO GRID - Desktop ===== */
 @media (min-width: 1024px) {
   .content-wrapper {
     display: grid;
@@ -124,9 +123,7 @@
   }
 }
 
-/* ===== CARD STYLES ===== */
 
-/* Hero Card */
 .hero-card {
   background-color: var(--white);
   border-radius: 1.5rem;
@@ -252,7 +249,6 @@
   pointer-events: none;
 }
 
-/* Workshop Card */
 .workshop-card {
   background-color: #eff6ff;
   border-radius: 1.5rem;
@@ -625,7 +621,6 @@
   color: var(--garage-blue);
 }
 
-/* ===== RESPONSIVE ===== */
 
 /* Tablet - 2 column grid */
 @media (min-width: 768px) and (max-width: 1023px) {

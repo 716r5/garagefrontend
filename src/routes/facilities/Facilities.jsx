@@ -62,7 +62,6 @@ const InfoCard = memo(({ icon, title, subtitle, color }) => {
   );
 });
 
-// Bookable space card (with button)
 const BookableCard = memo(({ facility, index }) => {
   return (
     <motion.div
@@ -132,7 +131,6 @@ const BookableCard = memo(({ facility, index }) => {
   );
 });
 
-// Equipment/Facility card (no button)
 const EquipmentCard = memo(({ facility, index }) => {
   return (
     <motion.div
@@ -190,8 +188,6 @@ const Facilities = () => {
     { icon: "box", title: "Free Equipment", subtitle: "Use on site", color: "Purple" },
   ];
 
-  // Split facilities into bookable spaces and equipment
-  // Bookable if isBookable flag is true OR if it has a link
   const bookableSpaces = data?.facilities?.filter(f => f.isBookable || f.link) || data?.bookableSpaces || [];
   const equipment = data?.facilities?.filter(f => !f.isBookable && !f.link) || data?.equipment || [];
 
@@ -221,7 +217,6 @@ const Facilities = () => {
               ))}
             </section>
 
-            {/* Bookable Spaces Section */}
             {bookableSpaces.length > 0 && (
               <section className={styles.facilitiesSection}>
                 <Typography variant="smallHeading" className={styles.sectionHeading}>
@@ -239,7 +234,6 @@ const Facilities = () => {
               </section>
             )}
 
-            {/* Facilities & Equipment Section */}
             {equipment.length > 0 && (
               <section className={styles.facilitiesSection}>
                 <Typography variant="smallHeading" className={styles.sectionHeading}>

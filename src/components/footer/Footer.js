@@ -55,7 +55,6 @@ const Footer = () => {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <div className={styles.footerGrid}>
-            {/* Brand Section */}
             <div className={styles.brandSection}>
               <div className={styles.brandLogo}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
@@ -85,7 +84,6 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Quick Links */}
             <div className={styles.linkSection}>
               <h4 className={styles.linkTitle}>Quick Links</h4>
               <ul className={styles.linkList}>
@@ -97,7 +95,6 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Resources */}
             <div className={styles.linkSection}>
               <h4 className={styles.linkTitle}>Resources</h4>
               <ul className={styles.linkList}>
@@ -109,7 +106,6 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Contact */}
             <div className={styles.linkSection}>
               <h4 className={styles.linkTitle}>Contact Us</h4>
               <ul className={styles.contactList}>
@@ -145,7 +141,6 @@ const Footer = () => {
         </div>
       </footer>
 
-      {/* Mobile Bottom Navigation */}
       <nav className={styles.mobileNav}>
         {mobileNavItems.map((item) => (
           <Link

@@ -28,7 +28,6 @@
   }
 }
 
-/* Brand Section */
 .brandSection {
   grid-column: 1 / -1;
 }
@@ -90,7 +89,6 @@
   fill: currentColor;
 }
 
-/* Link Sections */
 .linkSection {
   min-width: 0;
 }
