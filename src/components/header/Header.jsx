@@ -182,9 +182,9 @@ const Header = () => {
                   <Link
                     key="Login"
                     to="/login"
-                    className={styles["navlink"]}
+                    className={styles["join-btn"]}
                   >
-                    <Typography variant="body">Login</Typography>
+                    Login
                   </Link>
                   ) : (
                     <LoginMenu protected_navlinks={protected_navlinks}/>

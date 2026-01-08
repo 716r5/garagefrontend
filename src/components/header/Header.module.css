@@ -3,9 +3,12 @@
   left: 0;
   right: 0;
   position: fixed;
-  z-index: 8;
-  transition: background-color 0.4s, filter 0.4s;
-  background-color: var(--background);
+  z-index: 50;
+  transition: background-color 0.3s, backdrop-filter 0.3s;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--outline);
 }
 
 .header-inner {
@@ -13,12 +16,12 @@
   justify-content: space-between;
   align-items: center;
   gap: var(--content-gap-mobile);
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  height: 5rem;
 }
 
 .logo {
   height: 2.25rem;
+  flex-shrink: 0;
 }
 
 a {
@@ -27,47 +30,63 @@ a {
 
 .nav {
   display: flex;
-  gap: var(--content-gap-mobile);
+  gap: 2rem;
+  align-items: center;
 }
 
 .navlink-container {
-  color: var(--body);
+  color: #475569;
   position: relative;
   display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .navlink {
-  color: var(--body);
+  color: #475569;
   position: relative;
   display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navlink span,
+.navlink p {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
 }
 
 .navlink:hover {
-  color: var(--body);
+  color: var(--garage-blue);
 }
 
 .navlink::after {
-  position: absolute;
-  content: "";
-  display: block;
-  transition: width 0.3s cubic-bezier(0.7, 0, 0.3, 1);
-  height: 0.125rem;
-  background-color: var(--body);
-  width: 0%;
+  display: none;
 }
 
-.navlink:hover::after {
-  width: 100%;
+.navlink.active {
+  color: var(--garage-blue);
+  font-weight: 700;
+  border-bottom: 2px solid var(--garage-blue);
+  padding-bottom: 0.125rem;
 }
 
 .button {
   background-color: transparent;
-  padding: 0;
+  padding: 0.5rem;
   border: none;
   cursor: pointer;
-  border-radius: 100%;
-  width: 2.25rem;
-  height: 2.25rem;
+  border-radius: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #475569;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #f1f5f9;
 }
 
 .drawer {
@@ -84,34 +103,39 @@ a {
 }
 
 .shadow {
-  background-color: var(--white);
-  filter: drop-shadow(0 0.25rem 0.1875rem rgb(0 0 0 / 0.07))
-    drop-shadow(0 0.125rem 0.125rem rgb(0 0 0 / 0.06));
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .separator {
-  height: 0.0625rem;
-  background-color: var(--outline);
+  height: 1px;
+  background-color: #e2e8f0;
   width: 0;
   animation: grow 0.5s cubic-bezier(0.7, 0, 0.3, 1) 0.1s both;
 }
 
 .tablet-link {
-  animation: slide-in 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  animation: slide-in 0.4s ease-out;
   animation-fill-mode: both;
+}
+
+.tablet-link .navlink {
+  font-size: 1rem;
+  padding: 0.5rem 0;
 }
 
 .login-menu, .tablet-login-menu {
   background-color: var(--white);
   display: flex;
   flex-direction: column;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-1);
 }
 
 .login-menu {
   position: absolute;
   gap: 0.5rem;
-  padding: 0.625rem 0.625rem 0.625rem 0.75rem;
+  padding: 0.75rem;
   align-items: flex-end;
   right: 0;
   left: auto;
@@ -119,8 +143,35 @@ a {
 
 .tablet-login-menu {
   position: relative;
-  gap: 0.05rem;
+  gap: 0.25rem;
   margin-top: 1rem;
+}
+
+.login-btn {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--body);
+  transition: color 0.2s;
+}
+
+.login-btn:hover {
+  color: var(--garage-blue);
+}
+
+.join-btn {
+  background-color: var(--garage-blue);
+  color: var(--white);
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s;
+}
+
+.join-btn:hover {
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+  transform: translateY(-2px);
 }
 
 .nav,

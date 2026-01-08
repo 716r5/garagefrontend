@@ -24,6 +24,7 @@ const OverviewPage = ({ heading, data }) => {
                 image={card.coverPic}
                 to={`${index}/`}
                 bottomText={card.name}
+                tagline={card.tagline}
               />
             ))}
           </Grid>

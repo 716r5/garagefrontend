@@ -1,12 +1,14 @@
 .btn {
   padding: 0 2rem;
-  border-radius: 0;
+  border-radius: var(--radius);
   height: clamp(3rem, 3vw, 3.25rem); 
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   box-sizing: border-box;
+  font-weight: 600;
+  transition: all 0.2s;
 }
 
 .outlined {
@@ -29,16 +31,17 @@
 
 .filled {
   border: 0;
-  background-color: var(--garage-blue, #284d8a);
+  background-color: var(--garage-blue);
   color: var(--white);
 }
 
 .filled:hover {
-  background-color: var(--garage-blue-hover);
+  background-color: #1d4ed8;
 }
 
 .filled:active {
   background-color: var(--garage-blue-press);
+  transform: scale(0.98);
 }
 
 .outlined.disabled {
