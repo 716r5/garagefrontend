@@ -3,17 +3,30 @@ import { useContext, createContext, useState, useEffect } from "react";
 const CartContext = createContext();
 
 function CartProvider({ children }) {
-    const [userCredits, setUserCredits] = useState(() => {
-        return JSON.parse(localStorage.getItem("userCredits")) || 0;
-    });
+    // Security: Add validation when loading from localStorage to prevent data corruption
+    const loadSafeNumber = (key, defaultValue = 0) => {
+        try {
+            const value = JSON.parse(localStorage.getItem(key));
+            return typeof value === 'number' && !isNaN(value) && value >= 0 ? value : defaultValue;
+        } catch (e) {
+            console.error(`Error loading ${key} from localStorage:`, e);
+            return defaultValue;
+        }
+    };
 
-    const [cartCount, setCartCount] = useState(() => {
-        return JSON.parse(localStorage.getItem("cartCount")) || 0;
-    });
+    const loadSafeArray = (key, defaultValue = []) => {
+        try {
+            const value = JSON.parse(localStorage.getItem(key));
+            return Array.isArray(value) ? value : defaultValue;
+        } catch (e) {
+            console.error(`Error loading ${key} from localStorage:`, e);
+            return defaultValue;
+        }
+    };
 
-    const [cartItems, setCartItems] = useState(() => {
-        return JSON.parse(localStorage.getItem("cartItems")) || [];
-    });
+    const [userCredits, setUserCredits] = useState(() => loadSafeNumber("userCredits", 0));
+    const [cartCount, setCartCount] = useState(() => loadSafeNumber("cartCount", 0));
+    const [cartItems, setCartItems] = useState(() => loadSafeArray("cartItems", []));
 
     useEffect(() => {
         if (userCredits !== null && userCredits !== undefined) {
