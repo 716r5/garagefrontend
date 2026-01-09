@@ -39,13 +39,14 @@ This document outlines security best practices and measures implemented in the G
 
 ### 6. Security Linting
 - **ESLint security plugin**: Configured to detect common security issues
-- **Run linter**: Use `npm run build` or configure IDE to show security warnings
+- **Run linter manually**: Use `npx eslint --ext .js,.jsx src/` to see security warnings
 - **Security rules enabled**:
-  - Detect unsafe regex
-  - Detect eval usage
-  - Detect buffer assertions
-  - Detect possible timing attacks
-  - Warn on dynamic require/fs operations
+  - Detect unsafe regex (warn)
+  - Detect eval usage (warn)
+  - Detect buffer assertions (warn)
+  - Detect possible timing attacks (disabled - too many false positives)
+  - Note: Some rules disabled to reduce false positives in build (object-injection, non-literal-fs)
+- **Development use**: Security linter is most useful during development to catch issues early
 
 ## Security Checklist for Developers
 
@@ -68,11 +69,12 @@ This document outlines security best practices and measures implemented in the G
 
 ### Before Deployment
 - [ ] Run `npm audit` and fix all critical/high vulnerabilities
-- [ ] Run security linter: Check ESLint output for security warnings
+- [ ] Run security linter manually: `npx eslint --ext .js,.jsx src/` and review warnings
 - [ ] Review all environment variables
 - [ ] Ensure HTTPS is used for all API calls in production
 - [ ] Test authentication flows thoroughly
 - [ ] Verify file upload restrictions work correctly
+- [ ] Note: Build may have pre-existing linting warnings unrelated to security
 
 ## Known Limitations & Recommendations
 
