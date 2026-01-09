@@ -40,7 +40,26 @@ function Login() {
       },
     };
 
-    console.log(`Attempting to log in with matric: ${matric} and passcode: ${passcode}`);
+    // Security: Removed console.log to prevent credential exposure
+    
+    // Client-side validation (Note: Server-side validation is also required)
+    if (!matric || !passcode) {
+      setDenied(true);
+      return;
+    }
+
+    // Basic matric number validation (format: U1234567XY - 2 letters at end)
+    const matricRegex = /^[Uu]\d{7}[A-Za-z]{2}$/;
+    if (!matricRegex.test(matric)) {
+      setDenied(true);
+      return;
+    }
+
+    // Passcode should be exactly 4 digits
+    if (passcode.length !== 4) {
+      setDenied(true);
+      return;
+    }
     
     try {
       setLoading(true);
@@ -51,7 +70,7 @@ function Login() {
         config,
       );
 
-      console.log('Response:', response);
+      // Security: Removed console.log to prevent response data exposure
 
       setLoading(false);
       
@@ -63,6 +82,8 @@ function Login() {
       }
     } catch (error) {
       console.error("Error logging in", error);
+      setDenied(true);
+      setLoading(false);
     }
   };
 

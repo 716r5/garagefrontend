@@ -34,7 +34,7 @@ const Acknowledgement = () => {
     dateTime: new Date().toLocaleString(),
   }));
 
-  console.log("Order Details:", orderDetails);
+  // Security: Removed console.log to prevent data exposure
 
   const totalCost = cartItems.reduce((sum, item) => {
     const quantity = item.quantity;
@@ -66,13 +66,14 @@ const Acknowledgement = () => {
             headers: {
               "Content-Type": "text/plain;charset=utf-8",
             },
+            timeout: 30000, // 30 second timeout for security
           }
         );
 
         setAcknowledgement(response);
 
         if (response.data.status === "PURCHASE SUCCESSFUL") {
-          console.log("Purchase successful:", response.data.info);
+          // Security: Removed console.log to prevent data exposure
           setCredits(payload.remainingCredits);
           confirmation.current = true;
           return;
@@ -93,7 +94,7 @@ const Acknowledgement = () => {
     return () => {
       if (confirmation.current) {
         setCart(0, []);
-        console.log("Leaving acknowledgement page...");
+        // Security: Removed console.log to prevent data exposure
       }
     };
   }, []);

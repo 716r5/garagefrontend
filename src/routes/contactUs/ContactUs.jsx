@@ -36,11 +36,43 @@ const ContactUs = () => {
 
         const { firstName, lastName, email, phone, category, message } = formData;
 
+        // Client-side validation (Note: Server-side validation is also required)
         if (!firstName || !lastName || !email || !phone || !category || !message) {
             setMessageStatus("Please fill in all required fields.");
             setIsLoading(false);
             return;
         }
+
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setMessageStatus("Please enter a valid email address.");
+            setIsLoading(false);
+            return;
+        }
+
+        // Basic phone validation (allow various formats)
+        const phoneRegex = /^[\d\s+()-]{8,}$/;
+        if (!phoneRegex.test(phone)) {
+            setMessageStatus("Please enter a valid phone number.");
+            setIsLoading(false);
+            return;
+        }
+
+        // Sanitize inputs to prevent potential XSS (basic check)
+        // Note: For production, consider using a library like DOMPurify for comprehensive sanitization
+        const sanitizeInput = (input) => {
+            return input.replace(/[<>'"]/g, '');
+        };
+
+        const sanitizedFormData = {
+            firstName: sanitizeInput(firstName),
+            lastName: sanitizeInput(lastName),
+            email: sanitizeInput(email),
+            phone: sanitizeInput(phone),
+            category: sanitizeInput(category),
+            message: sanitizeInput(message)
+        };
 
         try {
             const filesPayload = await Promise.all(filesToUpload.map(file => new Promise((resolve, reject) => {
@@ -54,7 +86,7 @@ const ContactUs = () => {
             })));
 
             const payload = {
-                ...formData,
+                ...sanitizedFormData,
                 files: filesPayload.length > 0 ? filesPayload : [],
                 type: "contactUs"
             };
@@ -63,8 +95,9 @@ const ContactUs = () => {
                 headers: { 
                     "Content-Type": "text/plain;charset=utf-8",
                 },
+                timeout: 30000, // 30 second timeout for security
             });
-            console.log("Response from server:", response);
+            // Security: Removed console.log to prevent data exposure
 
             if (!response.data.success) throw new Error(response.data.error);
 

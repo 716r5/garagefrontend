@@ -11,10 +11,9 @@ const useFetch = ({ url, headers = {}, enabled = true, useCache = true }) => {
   const memoizedHeaders = useMemo(() => headers, [JSON.stringify(headers)]);
 
   const getData = async () => {
-    console.log("Fetching data from:", url);
+    // Security: Reduced logging to prevent data exposure
 
     if (control.current) {
-      console.log("Aborting previous request");
       control.current.abort();
     }
 
@@ -34,14 +33,15 @@ const useFetch = ({ url, headers = {}, enabled = true, useCache = true }) => {
 
       newUrl.searchParams.set("type", "shopInventoryVersion");
 
-      const response = await fetch(newUrl.toString());
+      const response = await fetch(newUrl.toString(), {
+        signal: controller.signal,
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const { cacheVersion: serverVersion } = await response.json();
 
       if (cachedData && useCache && Date.now() - cacheTimestamp < cacheExpiry && parseInt(localVersion, 10) === parseInt(serverVersion, 10)) {
-        console.log("Using cached data:", JSON.parse(cachedData));
         setData(JSON.parse(cachedData));
         setIsLoading(false);
         return;
@@ -49,7 +49,6 @@ const useFetch = ({ url, headers = {}, enabled = true, useCache = true }) => {
     }
     else{
       if (cachedData && useCache && Date.now() - cacheTimestamp < cacheExpiry) {
-      console.log("Using cached data:", JSON.parse(cachedData));
       setData(JSON.parse(cachedData));
       setIsLoading(false);
       return;
@@ -67,7 +66,6 @@ const useFetch = ({ url, headers = {}, enabled = true, useCache = true }) => {
       }
 
       const responseData = await response.json();
-      console.log("Response data:", responseData);
 
       if (responseData.error === 'Invalid token') {
         return logoutAction(true);
@@ -84,7 +82,9 @@ const useFetch = ({ url, headers = {}, enabled = true, useCache = true }) => {
         if (url.includes("type=shopInventory")) {
           const newUrl = new URL(url);
           newUrl.searchParams.set("type", "shopInventoryVersion");
-          const response = await fetch(newUrl.toString());
+          const response = await fetch(newUrl.toString(), {
+            signal: controller.signal,
+          });
           const { cacheVersion: serverVersion } = await response.json();
           localStorage.setItem(`${url}_version`, serverVersion);
         }
@@ -100,14 +100,13 @@ const useFetch = ({ url, headers = {}, enabled = true, useCache = true }) => {
   };
 
   useEffect(() => {
-    console.log("useFetch triggered:", { url, enabled, useCache });
+    // Security: Reduced logging to prevent data exposure
     if (enabled) {
       getData();
     }
 
     return () => {
       if (control.current) {
-        console.log("Cleaning up fetch request");
         control.current.abort();
       }
     };

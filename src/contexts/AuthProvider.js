@@ -7,7 +7,7 @@ const AuthContext = createContext();
 function AuthProvider({ children }) {
     const [name, setName] = useState(() => localStorage.getItem("name") || null);
     const [matric, setMatric] = useState(() => localStorage.getItem("matric") || "");
-    const [passcode, setPasscode] = useState("");
+    // Note: Passcode should never be stored in state or localStorage for security reasons
     const [token, setToken] = useState(() => localStorage.getItem("authToken") || "");
     const { clearCart } = useCart();
     const navigate = useNavigate();
@@ -41,26 +41,25 @@ function AuthProvider({ children }) {
         const jwt = responseData.token;
         setName(data.name);
         setMatric(data.matricNumber);
-        setPasscode(data.passcode);
+        // Note: Passcode is intentionally not stored for security reasons
         setToken(jwt);
     }
 
     const logoutAction = (wasExpired=false) => {
         setName(null);
         setMatric("");
-        setPasscode("");
         setToken("");
         navigate("/");
         localStorage.removeItem("name");
         localStorage.removeItem("matric");
-        localStorage.removeItem("token");
+        localStorage.removeItem("authToken");
         localStorage.setItem("authStatus", wasExpired ? "expired" : "loggedOut");
         clearCart();
         window.location.reload();
     }
 
     return (
-    <AuthContext.Provider value = {{ matric, passcode, name, token, loginAction, logoutAction }}>
+    <AuthContext.Provider value = {{ matric, name, token, loginAction, logoutAction }}>
         {children}
     </AuthContext.Provider>
     )
