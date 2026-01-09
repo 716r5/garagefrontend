@@ -7,7 +7,7 @@ function CartProvider({ children }) {
     const loadSafeNumber = (key, defaultValue = 0) => {
         try {
             const value = JSON.parse(localStorage.getItem(key));
-            return typeof value === 'number' && !isNaN(value) && value >= 0 ? value : defaultValue;
+            return typeof value === 'number' && !isNaN(value) && isFinite(value) && value >= 0 ? value : defaultValue;
         } catch (e) {
             console.error(`Error loading ${key} from localStorage:`, e);
             return defaultValue;

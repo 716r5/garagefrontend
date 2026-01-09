@@ -48,8 +48,8 @@ function Login() {
       return;
     }
 
-    // Basic matric number validation (format: U1234567XY)
-    const matricRegex = /^[Uu]\d{7}[A-Za-z]$/;
+    // Basic matric number validation (format: U1234567XY - 2 letters at end)
+    const matricRegex = /^[Uu]\d{7}[A-Za-z]{2}$/;
     if (!matricRegex.test(matric)) {
       setDenied(true);
       return;

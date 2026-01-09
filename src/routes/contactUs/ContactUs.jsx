@@ -60,8 +60,9 @@ const ContactUs = () => {
         }
 
         // Sanitize inputs to prevent potential XSS (basic check)
+        // Note: For production, consider using a library like DOMPurify for comprehensive sanitization
         const sanitizeInput = (input) => {
-            return input.replace(/[<>]/g, '');
+            return input.replace(/[<>'"]/g, '');
         };
 
         const sanitizedFormData = {
