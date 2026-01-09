@@ -86,6 +86,7 @@ This document outlines security best practices and measures implemented in the G
    - Adding token expiration checks
 3. **No CSRF protection**: CSRF tokens are not implemented
 4. **No rate limiting**: API endpoints may be vulnerable to brute force attacks
+5. **Development dependencies vulnerabilities**: Some vulnerabilities exist in react-scripts (dev dependencies) that would require breaking changes to fix. These do not affect production builds but should be addressed in future updates.
 
 ### Recommendations for Production
 1. **Implement server-side validation**: Never trust client-side validation alone
