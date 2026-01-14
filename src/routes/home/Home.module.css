@@ -552,7 +552,7 @@
 .ambassador-card {
   background-color: var(--white);
   border-radius: var(--card-radius);
-  padding: 2rem 2.5rem;
+  padding: 2.5rem;
   box-shadow: var(--shadow-1);
   overflow: hidden;
 }
@@ -566,15 +566,17 @@
 @media (min-width: 1024px) {
   .ambassador-content {
     flex-direction: row;
-    align-items: center;
-  }
-
-  .ambassador-text {
-    flex: 0 0 40%;
+    align-items: stretch;
   }
 
   .ambassador-grid {
-    flex: 0 0 60%;
+    align-content: start; 
+    height: 100%;         
+  }
+
+  .ambassador-text {
+    height: 100%;
+    justify-content: flex-start; 
   }
 }
 
@@ -645,6 +647,11 @@
 }
 
 .portfolio-card {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+
   position: relative;
   border-radius: var(--radius);
   overflow: hidden;
@@ -653,6 +660,7 @@
   box-shadow: var(--shadow-1);
   transition: box-shadow 0.2s, transform 0.2s;
 }
+
 
 .portfolio-card:hover {
   box-shadow: var(--shadow-2);
@@ -664,11 +672,13 @@
 }
 
 .portfolio-image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s;
 }
+
 
 .portfolio-overlay {
   position: absolute;
@@ -886,3 +896,4 @@
     font-size: 1.125rem;
   }
 }
+
