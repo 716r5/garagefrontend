@@ -51,11 +51,8 @@ function ProjectDetail() {
                 )}
               </header>
 
-              {/* Split Layout */}
               <div className={styles["split-layout"]}>
-                {/* Left Column - Content */}
                 <div className={styles["main-column"]}>
-                  {/* About Section */}
                   <section className={styles["content-section"]}>
                     <div className={styles["section-header"]}>
                       <div className={styles["section-icon"]}>
@@ -73,7 +70,6 @@ function ProjectDetail() {
                     </div>
                   </section>
 
-                  {/* Team Members Section */}
                   {data.teamMembers && data.teamMembers.length > 0 && (
                     <section className={styles["content-section"]}>
                       <div className={styles["section-header"]}>
@@ -100,9 +96,7 @@ function ProjectDetail() {
                   )}
                 </div>
 
-                {/* Right Column - Visuals & Details */}
                 <div className={styles["sidebar-column"]}>
-                  {/* Hero Image */}
                   {data.coverPic && (
                     <div className={styles["hero-image-wrapper"]}>
                       <div className={styles["hero-overlay"]} />
@@ -119,7 +113,6 @@ function ProjectDetail() {
                     </div>
                   )}
 
-                  {/* Project Details Card */}
                   <div className={styles["details-card"]}>
                     <h3 className={styles["details-title"]}>Project Details</h3>
                     <div className={styles["details-list"]}>
@@ -176,7 +169,6 @@ function ProjectDetail() {
                 </div>
               </div>
 
-              {/* Gallery Section */}
               {data.photos && data.photos.length > 0 && (
                 <section className={styles["gallery-section"]}>
                   <div className={styles["gallery-header"]}>

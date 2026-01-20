@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"; // Import Link from React Router
+import { Link } from "react-router-dom";
 import styles from "./PhotoCard.module.css";
 import Typography from "../typography/Typography";
 import Image from "../image/Image";

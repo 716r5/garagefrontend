@@ -149,8 +149,11 @@ const Header = () => {
         className={[styles.header, (shadow || open) && styles["shadow"]]
           .filter(Boolean)
           .join(" ")}
-        initial={{ y: 0 }}
-        animate={{ y: hidden ? "-100%" : 0 }}
+        initial={{ y: 0, opacity: 1 }}
+        animate={{ 
+          y: hidden ? "-150%" : 0,
+          opacity: hidden ? 0 : 1
+        }}
         transition={{ duration: 0.3, ease: [0.7, 0, 0.3, 1] }}
       >
         <Gutter>
@@ -160,37 +163,40 @@ const Header = () => {
             </HashLink>
 
             {breakpoint === "desktop" ? (
-              <nav className={styles["nav"]}>
-              {navlinks.map((navlink) =>
-                navlink.dropdown ? (
-                  <DropdownMenu
-                    key={navlink.label}
-                    header={navlink.label}
-                    navlinks={navlink.dropdown}
-                  />
-                ) : (
-                  <Link
-                    key={navlink.label}
-                    to={navlink.to}
-                    className={styles["navlink"]}
-                  >
-                    <Typography variant="body">{navlink.label}</Typography>
-                  </Link>
-                ))}
-
-                {name === null ? (
-                  <Link
-                    key="Login"
-                    to="/login"
-                    className={styles["join-btn"]}
-                  >
-                    Login
-                  </Link>
+              <>
+                <nav className={styles["nav"]}>
+                {navlinks.map((navlink) =>
+                  navlink.dropdown ? (
+                    <DropdownMenu
+                      key={navlink.label}
+                      header={navlink.label}
+                      navlinks={navlink.dropdown}
+                    />
                   ) : (
-                    <LoginMenu protected_navlinks={protected_navlinks}/>
-                  )
-                }
-              </nav>
+                    <Link
+                      key={navlink.label}
+                      to={navlink.to}
+                      className={styles["navlink"]}
+                    >
+                      <Typography variant="body">{navlink.label}</Typography>
+                    </Link>
+                  ))}
+                </nav>
+                <div className={styles["header-right"]}>
+                  {name === null ? (
+                    <Link
+                      key="Login"
+                      to="/login"
+                      className={styles["join-btn"]}
+                    >
+                      Login
+                    </Link>
+                    ) : (
+                      <LoginMenu protected_navlinks={protected_navlinks}/>
+                    )
+                  }
+                </div>
+              </>
             ) : (
               <MenuButton open={open} setOpen={setOpen} />
             )}
@@ -228,7 +234,7 @@ const Header = () => {
                         ) : (
                           <Link
                             to={navlink.to}
-                            className={styles[navlink]}
+                            className={styles["navlink"]}
                             onClick={handleClose}
                           >
                             <Typography variant="body">

@@ -40,23 +40,32 @@ body {
 }
 
 :root {
-  --garage-blue: #2563EB;
-  --garage-blue-hover: #3b82f6;
-  --garage-blue-press: #1d4ed8;
+  /* New color palette - Light mode oriented */
+  --dark-navy: #030211;
+  --deep-navy: #000127;
+  --bright-blue: #39B5E8;
+  --medium-blue: #2691cf;
+  --dark-blue: #0B2759;
+  --cyan-gradient: #A1F5F5;
 
-  --white: #FFFFFF;
-  --body: #0F172A;
-  --background: #EFF6FF;
+  /* Primary colors */
+  --garage-blue: #2691cf;
+  --garage-blue-hover: #39B5E8;
+  --garage-blue-press: #0B2759;
+
+  --white: #f1eee8;
+  --body: #030211;
+  --background: #f1eee8;
   --outline: #cbd5e1;
-  --outline-hover: #2563EB22;
-  --outline-press: #2563EB44;
+  --outline-hover: #39B5E822;
+  --outline-press: #2691cf44;
 
   --disabled: #94a3b8;
   --on-disabled: #64748b;
 
   --error: #E10D0D;
   --table-disabled: #cbd5e1;
-  --table-accent: #dbeafe;
+  --table-accent: #E6F7FF;
 
   --radius: 16px;
   --card-radius: 1.5rem;

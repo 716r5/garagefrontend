@@ -8,11 +8,18 @@ import styles from "./Home.module.css";
 import Button from "../../components/button/Button";
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 import { Link } from "react-router-dom";
-import { ReactComponent as ArrowForward } from "../../icons/arrow_forward_ios.svg";
 import CountUp from "../../components/CountUp/CountUp";
 import { motion } from "framer-motion";
 
-/** ===== Motion presets ===== **/
+const CircuitArrowForward = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <line x1="4" y1="12" x2="16" y2="12" stroke="currentColor" strokeWidth="2" />
+    <line x1="12" y1="8" x2="16" y2="12" stroke="currentColor" strokeWidth="2" />
+    <line x1="12" y1="16" x2="16" y2="12" stroke="currentColor" strokeWidth="2" />
+    <line x1="16" y1="12" x2="20" y2="12" stroke="currentColor" strokeWidth="2" />
+  </svg>
+);
+
 const viewportOnce = { once: true, amount: 0.25 };
 
 const revealUp = {
@@ -86,7 +93,7 @@ const Home = () => {
       <div id="start"></div>
 
       {data && (
-        <PageTemplate>
+        <>
           {showWarning && (
             <div className={styles["expired-warning-backdrop"]}>
               <div className={styles["expired-warning-modal"]}>
@@ -99,257 +106,79 @@ const Home = () => {
             </div>
           )}
 
-          <div className={styles["content-wrapper"]}>
-            {/* ===== Hero ===== */}
-            <section className={styles["hero-card"]}>
-              <div className={styles["hero-card-accent"]}></div>
-
-              <div className={styles["hero-card-content"]}>
+          <section className={styles["hero-banner"]}>
+            <div 
+              className={styles["hero-background"]}
+              style={{
+                backgroundImage: data?.bannerImage ? `url(${data.bannerImage})` : 'none',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            >
+              <div className={styles["hero-overlay"]}></div>
+            </div>
+            <div className={styles["hero-content"]}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+              >
+                <Typography
+                  variant="smallHeading"
+                  className={styles["hero-title"]}
+                >
+                  {data?.title || "Garage@EEE"}
+                </Typography>
+              </motion.div>
+              {upcomingWorkshop?.date && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                  className={styles["hero-date"]}
                 >
-                  <Typography
-                    variant="smallHeading"
-                    className={styles["hero-card-title"]}
-                  >
-                    Garage@EEE
+                  <Typography variant="body" className={styles["hero-date-text"]}>
+                    {upcomingWorkshop.date}
                   </Typography>
                 </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.25 }}
-                >
-                  <Typography
-                    variant="body"
-                    className={styles["hero-card-text"]}
-                  >
-                    Whether you are looking around to start tinkering or have
-                    been breaking down every electrical device that comes your
-                    way, there's a place for you here.
-                  </Typography>
-                </motion.div>
-
-                <div className={styles["hero-divider"]}></div>
-
-                <motion.div
-                  className={styles["hero-card-footer"]}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
-                >
-                  <Typography variant="body" className={styles["hero-card-ready"]}>
-                    Are you ready?
-                  </Typography>
-                  <Button to="/ambassadors/0">Join Us</Button>
-                </motion.div>
-              </div>
-
+              )}
               <motion.div
-                className={styles["hero-decor-1"]}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.15 }}
-                transition={{ duration: 1, delay: 0.8 }}
-              />
-              <motion.div
-                className={styles["hero-decor-2"]}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.1 }}
-                transition={{ duration: 1, delay: 1 }}
-              />
-            </section>
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
+                className={styles["hero-cta"]}
+              >
+                <Button to="/ambassadors/0">Join Us</Button>
+              </motion.div>
+            </div>
+          </section>
 
-            {/* ===== Upcoming Workshop (reveal on scroll) ===== */}
-            <motion.section
-              className={styles["workshop-card"]}
-              variants={revealUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className={styles["workshop-header"]}>
-                <div>
-                  <span className={styles["workshop-badge"]}>
-                    Upcoming Workshop
-                  </span>
+          <PageTemplate>
+          <div className={styles["content-wrapper"]}>
 
-                  <Typography
-                    variant="smallHeading"
-                    className={styles["workshop-title"]}
-                  >
-                    {upcomingWorkshop.name}
-                  </Typography>
-
-                  <Typography variant="body" className={styles["workshop-location"]}>
-                    <span className={styles["location-icon"]}>
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                      </svg>
-                    </span>
-                    {upcomingWorkshop.location || "TBA"}
-                  </Typography>
-                </div>
-
-                <Button to="/events">RSVP</Button>
-              </div>
-            </motion.section>
-
-            {/* ===== Flagship Events (reveal on scroll) ===== */}
-            <motion.div
-              className={styles["flagship-section"]}
-              variants={revealUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className={styles["flagship-card"]}>
-                <div className={styles["section-header"]}>
-                  <Typography variant="body" className={styles["section-title"]}>
-                    Flagship Events
-                  </Typography>
-                  <Link to="/events" className={styles["section-arrow"]}>
-                    <ArrowForward />
-                  </Link>
-                </div>
-
-                <Link to="/events" className={styles["flagship-content"]}>
-                  <div className={styles["flagship-images"]}>
-                    {eventData && eventData.length >= 3 ? (
-                      <>
-                        <div
-                          className={`${styles["flagship-img"]} ${styles["flagship-img-left"]}`}
-                        >
-                          <img
-                            src={eventData[1]?.coverPic}
-                            alt="Event"
-                            loading="lazy"
-                          />
-                        </div>
-
-                        <div
-                          className={`${styles["flagship-img"]} ${styles["flagship-img-center"]}`}
-                        >
-                          <img
-                            src={eventData[0]?.coverPic}
-                            alt="Main Event"
-                            loading="lazy"
-                          />
-                        </div>
-
-                        <div
-                          className={`${styles["flagship-img"]} ${styles["flagship-img-right"]}`}
-                        >
-                          <img
-                            src={eventData[2]?.coverPic}
-                            alt="Event"
-                            loading="lazy"
-                          />
-                        </div>
-                      </>
-                    ) : (
-                      <div className={styles["loading-wrapper"]}>
-                        <LoadingSpinner />
-                      </div>
-                    )}
+            {data?.about && (
+              <motion.section
+                className={styles["about-section"]}
+                variants={revealUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                <div className={styles["about-content"]}>
+                  <div className={styles["about-text-wrapper"]}>
+                    <Typography variant="smallHeading" className={styles["about-title"]}>
+                      What is Garage@EEE?
+                    </Typography>
+                    <Typography variant="body" className={styles["about-text"]}>
+                      {data.about}
+                    </Typography>
                   </div>
-
-                  <Typography variant="body" className={styles["flagship-title"]}>
-                    Discover Innovation Festival
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle"
-                    className={styles["flagship-subtitle"]}
-                  >
-                    Tap to explore our highlights
-                  </Typography>
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* ===== Upcoming Events (stagger list items) ===== */}
-            <motion.div
-              className={styles["events-section"]}
-              variants={revealUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className={styles["events-card"]}>
-                <div className={styles["section-header"]}>
-                  <Typography variant="body" className={styles["section-title"]}>
-                    Upcoming Events
-                  </Typography>
-                  <Link to="/events" className={styles["section-link"]}>
-                    <Typography variant="subtitle">View All</Typography>
-                  </Link>
                 </div>
+              </motion.section>
+            )}
 
-                <motion.div
-                  className={styles["event-list"]}
-                  variants={staggerFast}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={viewportOnce}
-                >
-                  {eventData ? (
-                    eventData.slice(0, 3).map((event, index) => (
-                      <motion.div
-                        key={event.name}
-                        variants={revealUpSoft}
-                        transition={{ duration: 0.45, ease: "easeOut" }}
-                      >
-                        <Link
-                          to={`/events/${index}`}
-                          className={styles["event-item"]}
-                        >
-                          <div className={styles["event-image"]}>
-                            <img
-                              src={event.coverPic}
-                              alt={event.name}
-                              loading="lazy"
-                            />
-                          </div>
-
-                          <div className={styles["event-info"]}>
-                            <Typography variant="body" className={styles["event-name"]}>
-                              {event.name}
-                            </Typography>
-                            <Typography
-                              variant="subtitle"
-                              className={styles["event-date"]}
-                            >
-                              {event.date || "Date TBA"}
-                            </Typography>
-                          </div>
-
-                          <div className={styles["event-arrow"]}>
-                            <ArrowForward />
-                          </div>
-                        </Link>
-                      </motion.div>
-                    ))
-                  ) : (
-                    <div className={styles["loading-wrapper"]}>
-                      <LoadingSpinner />
-                    </div>
-                  )}
-                </motion.div>
-              </div>
-            </motion.div>
-
-            {/* ===== Sponsors (stagger grid) ===== */}
             <motion.div
               className={styles["sponsors-section"]}
               variants={revealUp}
@@ -392,7 +221,185 @@ const Home = () => {
               </div>
             </motion.div>
 
-            {/* ===== Stats (stagger items) ===== */}
+            {eventData && eventData.length > 0 && (
+              <motion.section
+                className={styles["event-details-section"]}
+                variants={revealUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                {eventData.slice(0, 3).map((event, index) => (
+                  <motion.div
+                    key={event.name || index}
+                    className={`${styles["event-detail-item"]} ${
+                      index % 2 === 0 ? styles["event-detail-left"] : styles["event-detail-right"]
+                    }`}
+                    variants={revealUpSoft}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportOnce}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    {index % 2 === 0 ? (
+                      <>
+                        <div className={styles["event-detail-image"]}>
+                          {event.coverPic ? (
+                            <img src={event.coverPic} alt={event.name} loading="lazy" />
+                          ) : (
+                            <div className={styles["event-detail-placeholder"]}></div>
+                          )}
+                        </div>
+                        <div className={styles["event-detail-text"]}>
+                          <span className={styles["event-detail-badge"]}>
+                            {index === 0 ? "Upcoming Event" : "Event"}
+                          </span>
+                          <Typography variant="smallHeading" className={styles["event-detail-title"]}>
+                            {event.name}
+                          </Typography>
+                          {event.date && (
+                            <Typography variant="body" className={styles["event-detail-date"]}>
+                              {event.date}
+                            </Typography>
+                          )}
+                          {event.location && (
+                            <Typography variant="body" className={styles["event-detail-location"]}>
+                              <span className={styles["location-icon"]}>
+                                <svg
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                >
+                                  <circle cx="12" cy="12" r="2" />
+                                  <line x1="12" y1="2" x2="12" y2="10" stroke="currentColor" strokeWidth="2" />
+                                  <line x1="8" y1="6" x2="16" y2="6" stroke="currentColor" strokeWidth="1.5" />
+                                  <line x1="6" y1="8" x2="18" y2="8" stroke="currentColor" strokeWidth="1" />
+                                </svg>
+                              </span>
+                              {event.location}
+                            </Typography>
+                          )}
+                          <div className={styles["event-detail-cta"]}>
+                            <Button to={`/events/${index}`}>Learn More</Button>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className={styles["event-detail-text"]}>
+                          <span className={styles["event-detail-badge"]}>Event</span>
+                          <Typography variant="smallHeading" className={styles["event-detail-title"]}>
+                            {event.name}
+                          </Typography>
+                          {event.date && (
+                            <Typography variant="body" className={styles["event-detail-date"]}>
+                              {event.date}
+                            </Typography>
+                          )}
+                          {event.location && (
+                            <Typography variant="body" className={styles["event-detail-location"]}>
+                              <span className={styles["location-icon"]}>
+                                <svg
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                >
+                                  <circle cx="12" cy="12" r="2" />
+                                  <line x1="12" y1="2" x2="12" y2="10" stroke="currentColor" strokeWidth="2" />
+                                  <line x1="8" y1="6" x2="16" y2="6" stroke="currentColor" strokeWidth="1.5" />
+                                  <line x1="6" y1="8" x2="18" y2="8" stroke="currentColor" strokeWidth="1" />
+                                </svg>
+                              </span>
+                              {event.location}
+                            </Typography>
+                          )}
+                          <div className={styles["event-detail-cta"]}>
+                            <Button to={`/events/${index}`}>Learn More</Button>
+                          </div>
+                        </div>
+                        <div className={styles["event-detail-image"]}>
+                          {event.coverPic ? (
+                            <img src={event.coverPic} alt={event.name} loading="lazy" />
+                          ) : (
+                            <div className={styles["event-detail-placeholder"]}></div>
+                          )}
+                        </div>
+                      </>
+                    )}
+                  </motion.div>
+                ))}
+              </motion.section>
+            )}
+
+            <motion.section
+              className={styles["gallery-section"]}
+              variants={revealUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
+              <Link to="/events" className={styles["gallery-link-wrapper"]}>
+                <div className={styles["gallery-header"]}>
+                  <Typography variant="smallHeading" className={styles["gallery-title"]}>
+                    Explore Our Community
+                  </Typography>
+                  <div className={styles["gallery-link"]}>
+                    <Typography variant="subtitle">View All Events</Typography>
+                    <CircuitArrowForward />
+                  </div>
+                </div>
+                <motion.div
+                  className={styles["gallery-grid"]}
+                  variants={staggerWrap}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportOnce}
+                >
+                  {eventData && eventData.length > 0 ? (
+                    eventData.slice(0, 6).map((event, index) => (
+                      <motion.div
+                        key={event.name || index}
+                        className={styles["gallery-item"]}
+                        variants={revealUpSoft}
+                        transition={{ duration: 0.45, ease: "easeOut" }}
+                      >
+                        <Link to={`/events/${index}`} className={styles["gallery-card"]}>
+                          {event.coverPic ? (
+                            <img
+                              src={event.coverPic}
+                              alt={event.name}
+                              className={styles["gallery-image"]}
+                              loading="lazy"
+                            />
+                          ) : (
+                            <div className={styles["gallery-placeholder"]}></div>
+                          )}
+                          <div className={styles["gallery-overlay"]}>
+                            <Typography variant="body" className={styles["gallery-item-title"]}>
+                              {event.name}
+                            </Typography>
+                            {event.date && (
+                              <Typography variant="subtitle" className={styles["gallery-item-date"]}>
+                                {event.date}
+                              </Typography>
+                            )}
+                          </div>
+                        </Link>
+                      </motion.div>
+                    ))
+                  ) : (
+                    <div className={styles["loading-wrapper"]}>
+                      <LoadingSpinner />
+                    </div>
+                  )}
+                </motion.div>
+              </Link>
+            </motion.section>
+
             <motion.div
               className={styles["stats-section"]}
               variants={revealUp}
@@ -467,7 +474,6 @@ const Home = () => {
               </div>
             </motion.div>
 
-            {/* ===== Ambassador Track (stagger grid) ===== */}
             <motion.div
               className={styles["ambassador-section"]}
               variants={revealUp}
@@ -540,6 +546,7 @@ const Home = () => {
             </motion.div>
           </div>
         </PageTemplate>
+        </>
       )}
     </Transition>
   );
