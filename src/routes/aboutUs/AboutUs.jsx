@@ -1,10 +1,36 @@
 import Typography from "../../components/typography/Typography";
 import Transition from "../../components/transition/Transition";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import styles from "./AboutUs.module.css";
 import bannerImage from "../../img/banner.jpeg";
+import cappyimg from "../../img/cappy/goldcappyforwardtrans.png";
+import excitedcappy from "../../img/cappy/excitedtranscappy copy.webm";
+import bluecappy from "../../img/cappy/bluecappyforwardtrans.png";
 
 const AboutUs = () => {
+  useEffect(() => {
+    const images = document.querySelectorAll('.fade-on-scroll');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          entry.target.classList.remove('is-fading');
+        } else {
+          entry.target.classList.remove('is-visible');
+          entry.target.classList.add('is-fading');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    images.forEach(img => observer.observe(img));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <Transition>
       <div className={styles.aboutContainer}>
@@ -34,7 +60,7 @@ const AboutUs = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <img
-              src="/img/cappy/goldcappyforward.png"
+              src={cappyimg}
               alt="Garage Mascot"
               className={styles.mascot}
             />
@@ -42,16 +68,39 @@ const AboutUs = () => {
         </div>
 
         <div className={styles.comingSoon}>
-          <Typography variant="smallHeading">
-            Content Coming Soon
-          </Typography>
-          <Typography variant="body">
-            We're working on something exciting. Check back later!
-          </Typography>
+          <div className={styles.textContent}>
+            <Typography variant="Heading">
+              Our story begins here...
+            </Typography>
+            <Typography variant="body">
+              conceptualized in 2012, with the first batch of projects approved in october 2014 
+            </Typography>
+          </div>
+
+          <img 
+            src={bluecappy} 
+            alt="Garage Mascot Blue Cappy" 
+            className="fade-on-scroll"
+            style={{ width: '200px', height: 'auto', marginRight: 'auto' }}
+          />
+          
+          <video 
+            className={styles.videoRight}
+            autoPlay 
+            muted 
+            loop
+            playsInline
+            style={{ backgroundColor: 'transparent' }}
+          >
+            <source src={excitedcappy} type="video/webm" />
+          </video>
         </div>
+  
       </div>
     </Transition>
   );
 };
 
 export default AboutUs;
+
+
