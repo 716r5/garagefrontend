@@ -12,10 +12,13 @@ import CartProvider from "./contexts/CartProvider";
 import LoadingSpinner from "./components/loadingSpinner/LoadingSpinner";
 
 const AmbassadorDetail = lazy(() => import("./routes/ambassadors/AmbassadorDetail"));
+const AmbassadorsOverview = lazy(() => import("./routes/ambassadorsOverview/AmbassadorsOverview"));
 const EventsOverview = lazy(() => import("./routes/eventsOverview/EventsOverview"));
 const EventDetail = lazy(() => import("./routes/events/EventDetail"));
 const ProjectsOverview = lazy(() => import("./routes/projectsOverview/ProjectsOverview"));
 const ProjectDetail = lazy(() => import("./routes/projects/ProjectDetail"));
+const InnovatorsOverview = lazy(() => import("./routes/innovatorsOverview/InnovatorsOverview"));
+const TinkeringOverview = lazy(() => import("./routes/tinkeringOverview/TinkeringOverview"));
 const NotFound = lazy(() => import("./routes/notFound/NotFound"));
 const Facilities = lazy(() => import("./routes/facilities/Facilities"));
 const NewsletterPage = lazy(() => import("./routes/newsletter/NewsletterPage"));
@@ -52,11 +55,14 @@ function App() {
             <AnimatePresence mode="wait">
               <Routes location={location} key={location.pathname}>
                 <Route exact path="/" element={<Home />} />
+                <Route path="/ambassadors" element={<AmbassadorsOverview />} />
                 <Route path="/ambassadors/:id" element={<AmbassadorDetail />} />
                 <Route path="/events" element={<EventsOverview />} />
                 <Route path="/events/:id" element={<EventDetail />} />
                 <Route path="/projects" element={<ProjectsOverview />} />
                 <Route path="/projects/:id" element={<ProjectDetail />} />
+                <Route path="/innovators" element={<InnovatorsOverview />} />
+                <Route path="/tinkering" element={<TinkeringOverview />} />
                 <Route path="/facilities" element={<Facilities />} />
                 <Route path="/newsletter" element={<NewsletterPage />} />
                 <Route path="/assigned_projects" element={<AssignedProjects />} />

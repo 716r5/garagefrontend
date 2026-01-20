@@ -9,12 +9,15 @@
 
 .heading-space {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  text-align: center;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 1rem;
   position: relative;
+}
+
+.heading-space > *:last-child {
+  flex: 1;
 }
 
 .heading-space::before {
@@ -55,6 +58,10 @@
   .content-wrapper {
     padding: 1.5rem 1rem;
     gap: 1.5rem;
+  }
+
+  .heading-space {
+    gap: 1rem;
   }
 
   .heading-space::before {

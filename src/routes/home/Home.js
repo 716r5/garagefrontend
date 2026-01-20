@@ -39,13 +39,6 @@ const staggerWrap = {
   },
 };
 
-const staggerFast = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.03 },
-  },
-};
-
 const Home = () => {
   const [authStatus, setAuthStatus] = useState(
     () => localStorage.getItem("authStatus") || "loggedOut"

@@ -113,9 +113,9 @@ const Header = () => {
     {
       label: "Recruitment",
       dropdown: [
-        { label: "Ambassador", to: "/#ambassadors" },
-        { label: "Innovator",  to: "/#innovators"  },
-        { label: "Tinkering",  to: "/#tinkering"   },
+        { label: "Ambassador", to: "/ambassadors" },
+        { label: "Innovator",  to: "/innovators"  },
+        { label: "Tinkering",  to: "/tinkering"   },
       ],
     },
     {
