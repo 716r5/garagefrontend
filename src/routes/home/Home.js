@@ -10,6 +10,7 @@ import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 import { Link } from "react-router-dom";
 import CountUp from "../../components/CountUp/CountUp";
 import { motion } from "framer-motion";
+import SneakPeek from "../../components/SneakPeek/SneakPeek";
 
 const CircuitArrowForward = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -171,6 +172,16 @@ const Home = () => {
                 </div>
               </motion.section>
             )}
+
+            <motion.section
+              variants={revealUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <SneakPeek />
+            </motion.section>
 
             <motion.div
               className={styles["sponsors-section"]}
