@@ -440,7 +440,7 @@
   width: 100%;
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #2691cf;
+  background-color: #b8d9fd;
 }
 
 @media (min-width: 768px) {
@@ -469,7 +469,7 @@
 .gallery-title {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
-  color: var(--white);
+  color: var(--body);
 }
 
 .gallery-link {

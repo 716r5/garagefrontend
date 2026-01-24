@@ -85,7 +85,7 @@ const AboutUs = () => {
           />
           
           <video 
-            className={styles.videoRight}
+            className={`${styles.videoRight} ${styles.videoExcitedCappy}`}
             autoPlay 
             muted 
             loop

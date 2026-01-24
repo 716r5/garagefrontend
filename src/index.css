@@ -47,9 +47,11 @@ body {
   --medium-blue: #2691cf;
   --dark-blue: #0B2759;
   --cyan-gradient: #A1F5F5;
+  --sky-blue: #b8d9fd;
+  --deep-blue: #073871;
 
   /* Primary colors */
-  --garage-blue: #2691cf;
+  --garage-blue: #073871;
   --garage-blue-hover: #39B5E8;
   --garage-blue-press: #0B2759;
 
